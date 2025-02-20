@@ -557,6 +557,35 @@ header .navbar {
         align-items: center;
         flex-direction: column-reverse;
     }
+  /* For WebKit-based browsers (Chrome, Safari) */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* For Firefox */
+    html {
+        scrollbar-width: none;
+    }
+
+    /* For Internet Explorer and Edge (older versions) */
+    body {
+        -ms-overflow-style: none;
+    }
+  
+  /* For WebKit-based browsers (Chrome, Safari) */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* For Firefox */
+    html {
+        scrollbar-width: none;
+    }
+
+    /* For Internet Explorer and Edge (older versions) */
+    body {
+        -ms-overflow-style: none;
+    }
 }
 
 /* Responsive media query code for max width 640px */
