@@ -581,4 +581,19 @@ header .navbar {
         flex-direction: column;
         gap: 20px;
     }
+  /*Hide scroll bar for mobile devices*/
+      /* For WebKit-based browsers (Chrome, Safari) */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* For Firefox */
+    html {
+        scrollbar-width: none;
+    }
+
+    /* For Internet Explorer and Edge (older versions) */
+    body {
+        -ms-overflow-style: none;
+    }
 }
