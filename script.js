@@ -5,7 +5,7 @@ const menuCloseButton = document.querySelector("#menu-close-button");
 
 // Function to handle active link on scroll
 function updateActiveNav() {
-    let scrollPosition = window.scrollY + 500;
+    let scrollPosition = window.scrollY + window.innerHeight / 2;
 
     sections.forEach((section) => {
         const sectionTop = section.offsetTop;
@@ -23,6 +23,15 @@ function updateActiveNav() {
     });
 }
 
+//For excessive function for fast scrolling
+function debounce(func, delay = 100) {
+    let timer;
+    return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
 // Add event listeners for scroll tracking
 window.addEventListener("scroll", updateActiveNav);
 document.addEventListener("DOMContentLoaded", updateActiveNav);
@@ -33,12 +42,16 @@ menuOpenButton.addEventListener("click", () => {
 });
 
 // Close menu when the close button is clicked
-menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+menuCloseButton.addEventListener("click", () => {
+    document.body.classList.remove("show-mobile-menu");
+});
 
 // Close menu when the nav link is clicked
 navLinks.forEach(link => {
-    link.addEventListener("click", () => menuOpenButton.click());
-})
+    link.addEventListener("click", () => {
+        document.body.classList.remove("show-mobile-menu");
+    });
+});
 
 // Initialize Swiper
 const swiper = new Swiper('.slider-wrapper', {
