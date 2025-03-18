@@ -1,6 +1,31 @@
 const navLinks = document.querySelectorAll(".nav-menu .nav-link");
+const sections = document.querySelectorAll("section");
 const menuOpenButton = document.querySelector("#menu-open-button");
 const menuCloseButton = document.querySelector("#menu-close-button");
+
+// Function to handle active link on scroll
+function updateActiveNav() {
+    let scrollPosition = window.scrollY + 500;
+
+    sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute("id");
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === `#${sectionId}`) {
+                    link.classList.add("active");
+                }
+            });
+        }
+    });
+}
+
+// Add event listeners for scroll tracking
+window.addEventListener("scroll", updateActiveNav);
+document.addEventListener("DOMContentLoaded", updateActiveNav);
 
 menuOpenButton.addEventListener("click", () => {
     // Toggle mobile menu visibility
@@ -57,11 +82,3 @@ const swiper = new Swiper('.slider-wrapper', {
         },
     }
   });
-  
-  // Function to show/hide navigation buttons
-function toggleNavigationButtons(swiper) {
-    const { isBeginning, isEnd } = swiper;
-
-    swiper.navigation.prevEl.style.display = isBeginning ? 'none' : 'block';
-    swiper.navigation.nextEl.style.display = isEnd ? 'none' : 'block';
-}
