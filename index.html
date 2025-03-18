@@ -315,14 +315,15 @@
                     </ul>
 
                     <form action="send_mail.php" method="POST" class="contact-form">
-                        <input type="text" placeholder="Your name" class="form-input" required>
-                        <input type="tel" 
+                        <input type="text" name="name" placeholder="Your name" class="form-input" required>
+                        <input type="email" name="email" placeholder="Your email" class="form-input" required>
+                        <input type="tel" name="number"
                             placeholder="Your number (e.g. 09XXXXXXXXX)" 
                             class="form-input" 
                             pattern="09[0-9]{9}" 
                             maxlength="11"
                             required>
-                        <textarea placeholder="Your message" class="form-input" required></textarea>
+                        <textarea name="message" placeholder="Your message" class="form-input" required></textarea>
                         <button class="submit-button">Submit</button>
                     </form>
                 </div>
@@ -342,5 +343,26 @@
 
         <!-- Linking custom script -->
     <script src="script.js"></script>
+
+    <script>
+        document.querySelector(".contact-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+        
+            const formData = new FormData(this);
+        
+            fetch("send_mail.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert(result); // Show success or error message
+            })
+            .catch(error => {
+                alert("Failed to send the message. Please try again.");
+            });
+        });
+        </script>
+        
 </body>
 </html>
